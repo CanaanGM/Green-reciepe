@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  recipie-backend:
+    image: ${DOCKER_REGISTRY-}recipiebackend
+    build:
+      context: .
+      dockerfile: Recipie-Backend/Dockerfile
+    ports:
+      - "5298:080"
+      - "443"
+    depends_on: 
+      - sqlServerReciepe
+
+  sqlServerReciepe:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      SA_PASSWORD: "DiLb984ImW"
+      ACCEPT_EULA: "Y"
+    ports:
+     - "1435:1433"
+    container_name: Recipe-warehouse
+    volumes:
+      - "./SqlServer-db-data:/var/opt/mssql/data"
+    restart: always
