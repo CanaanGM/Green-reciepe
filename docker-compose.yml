@@ -23,3 +23,7 @@ services:
     volumes:
       - "./SqlServer-db-data:/var/opt/mssql/data"
     restart: always
+
+
+volumes:
+  SqlServer-db-data:
